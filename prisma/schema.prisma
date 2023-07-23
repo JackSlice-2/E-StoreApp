@@ -14,11 +14,11 @@ datasource db {
 model Store {
   id String @id @default(uuid())
   name String
-  userId String
   whatsapp String
   phone String
   instagram String
   facebook String
+  userId String
   billboards Billboard[] @relation("StoreToBillboard")
   categories Category[] @relation("StoreToCategory")
   sizes Size[] @relation("StoreToSize")

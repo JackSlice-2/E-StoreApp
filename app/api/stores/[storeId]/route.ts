@@ -10,7 +10,7 @@ export async function PATCH(
     const { userId } = auth();
     const body =await req.json();
 
-    const { name } = body;
+    const { name, whatsapp, phone, instagram, facebook } = body;
 
     if (!userId) {
         return new NextResponse("Unauthenticated", { status: 401 });
@@ -30,7 +30,11 @@ export async function PATCH(
             userId
         },
         data: {
-            name
+            name,
+            whatsapp, 
+            phone, 
+            instagram, 
+            facebook
         }
     });
 

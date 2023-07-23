@@ -9,7 +9,7 @@ export async function POST(
         const { userId } = auth();
         const body = await req.json();
 
-        const { name } = body;
+        const { name, whatsapp, phone, instagram, facebook } = body;
 
         if (!userId) {
             return new NextResponse("Unauthorized", { status: 401 });
@@ -23,6 +23,10 @@ export async function POST(
             data: {
                 name,
                 userId,
+                whatsapp,
+                phone,
+                instagram,
+                facebook
             }
         });
         return NextResponse.json(store);

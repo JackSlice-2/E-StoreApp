@@ -30,10 +30,10 @@ interface SettingsFormProps {
 
 const formSchema = z.object({
     name: z.string().min(1),
-    whatsapp: z.string().optional(),
-    phone: z.string().optional(),
-    instagram: z.string().optional(),
-    facebook: z.string().optional(),
+    whatsapp: z.string().min(1),
+    phone: z.string().min(1),
+    instagram: z.string().min(1),
+    facebook: z.string().min(1),
 });
 
 type SettingsFormValues = z.infer<typeof formSchema>;
@@ -121,7 +121,6 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
                             </FormItem>
                         )}
                     />
-
                     <FormField
                       control={form.control}
                       name="whatsapp"
