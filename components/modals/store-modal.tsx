@@ -20,6 +20,10 @@ import axios from "axios";
 
 const formSchema = z.object({
     name: z.string().min(1),
+    whatsapp: z.string().optional(),
+    phone: z.string().optional(),
+    instagram: z.string().optional(),
+    facebook: z.string().optional(),
 });
 
 export const StoreModal = () => {
@@ -32,6 +36,10 @@ export const StoreModal = () => {
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: "",
+            whatsapp: "",
+            phone: "",
+            instagram: "",
+            facebook: ""
         },
     });
 
@@ -68,6 +76,58 @@ export const StoreModal = () => {
                           <FormLabel>Name</FormLabel>
                           <FormControl>
                             <Input disabled={loading} placeholder="E-Commerce" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="whatsapp"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>WhatsApp Link</FormLabel>
+                          <FormControl>
+                            <Input disabled={loading} placeholder="Paste WhatsApp Link Here..." {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Phone Number</FormLabel>
+                          <FormControl>
+                            <Input disabled={loading} placeholder="+55 55 5 5555-5555" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="instagram"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Instagram Link</FormLabel>
+                          <FormControl>
+                            <Input disabled={loading} placeholder="Paste Instagram Link Here..." {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="facebook"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Facebook Link</FormLabel>
+                          <FormControl>
+                            <Input disabled={loading} placeholder="Paste Facebook Link Here..." {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
