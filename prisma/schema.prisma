@@ -21,6 +21,7 @@ model Store {
   colors Color[] @relation("StoreToColor")
   products Product[] @relation("StoreToProduct")
   orders Order[] @relation("StoreToOrder")
+  infos Info[] @relation("StoreToInfo")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -139,5 +140,22 @@ model OrderItem {
 
   @@index([orderId])
   @@index([productId])
+}
 
+model Info {
+  id String @id @default(uuid())
+  storeId String
+  store Store @relation("StoreToInfo", fields: [storeId], references: [id])
+  name String
+  billboardid String
+  icon String
+  phonenumber String
+  whatsapp String
+  instagram String
+  facebook String
+  email String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([storeId])
 }
