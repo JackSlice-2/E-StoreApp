@@ -159,3 +159,15 @@ model Info {
 
   @@index([storeId])
 }
+
+model PayPalPayment {
+  id String @id @default(uuid())
+  orderID String
+  payerID String
+  paymentID String?
+  billingToken String?
+  facilitatorAccessToken String?
+  paymentSource String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
