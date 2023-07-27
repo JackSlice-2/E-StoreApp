@@ -1,25 +1,28 @@
 "use client"
 import { Heading } from "@/components/ui/heading"
 import { Separator } from "@/components/ui/separator"
-import { OrderColumn, columns } from "./columns"
+import { OrderColumn, PayOrderColumn, columns, paycolumns } from "./columns"
 import { DataTable } from "@/components/ui/data-table"
 
 interface OrderClientProps {
-    data: OrderColumn[]
+    stripeData: OrderColumn[]
+    paypalData: PayOrderColumn[]
 }
 
 export const OrderClient: React.FC<OrderClientProps> = ({
-    data
+    stripeData,
+    paypalData
 }) => {
 
     return (
         <>
             <Heading
-            title={`Orders (${data.length})`}
+            title={`Orders (${stripeData.length})`}
             description="Manage orders for your store"
             />
         <Separator />
-        <DataTable searchKey="products" columns={columns} data={data}/>
+        <DataTable searchKey="products" columns={columns} data={stripeData}/>
+        <DataTable searchKey="products" columns={paycolumns} data={paypalData}/>
         </>
     )
 }

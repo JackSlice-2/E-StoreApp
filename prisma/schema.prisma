@@ -22,6 +22,7 @@ model Store {
   products Product[] @relation("StoreToProduct")
   orders Order[] @relation("StoreToOrder")
   infos Info[] @relation("StoreToInfo")
+  payPalPayment PayPalPayment[] @relation("StoreToPayPalPayment")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -127,6 +128,7 @@ model Order {
   address String @default("")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  totalPrice String?
 
   @@index([storeId])
 }
@@ -162,12 +164,17 @@ model Info {
 
 model PayPalPayment {
   id String @id @default(uuid())
+  storeId String
   orderID String
   payerID String
   paymentID String?
   billingToken String?
   facilitatorAccessToken String?
   paymentSource String?
+  totalPrice String @default("0")
+  store Store @relation("StoreToPayPalPayment", fields: [storeId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([storeId])
 }
