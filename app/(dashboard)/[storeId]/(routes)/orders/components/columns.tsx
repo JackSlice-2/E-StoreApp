@@ -1,3 +1,6 @@
+
+
+
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
@@ -5,7 +8,7 @@ import { CellAction } from "./cell-action";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type OrderColumn = {
+export type CommonOrderColumn = {
   id: string;
   phone: string;
   address: string;
@@ -13,6 +16,20 @@ export type OrderColumn = {
   totalPrice: string;
   products: string;
   createdAt: string;
+}
+
+export type OrderColumn = CommonOrderColumn;
+
+export type PayOrderColumn = CommonOrderColumn & {
+  id: string;
+  totalPrice: string;
+  createdAt: string;
+  orderID: string;
+  payerID: string;
+  paymentID: string;
+  billingToken: string;
+  facilitatorAccessToken: string;
+  paymentSource: string;
 }
 
 export const columns: ColumnDef<OrderColumn>[] = [
@@ -41,22 +58,6 @@ export const columns: ColumnDef<OrderColumn>[] = [
     cell: ({ row }) => <CellAction data={row.original} />
   },
 ]
-
-export type PayOrderColumn = {
-  id: string;
-  phone: string;
-  address: string;
-  isPaid: boolean;
-  totalPrice: string;
-  products: string;
-  createdAt: string;
-  orderID: string;
-  payerID: string;
-  paymentID: string;
-  billingToken: string;
-  facilitatorAccessToken: string;
-  paymentSource: string;
-}
 
 export const paycolumns: ColumnDef<OrderColumn>[] = [
   {
@@ -106,3 +107,4 @@ export const paycolumns: ColumnDef<OrderColumn>[] = [
     cell: ({ row }) => <CellAction data={row.original} />
   },
 ]
+

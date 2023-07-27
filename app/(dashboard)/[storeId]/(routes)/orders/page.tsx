@@ -3,6 +3,26 @@ import { OrderClient } from "./components/client";
 import { OrderColumn, PayOrderColumn } from "./components/columns";
 import { format } from "date-fns";
 import { formatter } from "@/lib/utils";
+import { PayPalPayment } from "@prisma/client";
+
+// Helper function to convert PayPalPayment data to PayOrderColumn format
+const convertToPayOrderColumn = (paypalPayments: PayPalPayment[]): PayOrderColumn[] => {
+  return paypalPayments.map((item) => ({
+    id: item.id,
+    phone: "",
+    address: "",
+    isPaid: true,
+    products: "",
+    totalPrice: formatter.format(Number(item.totalPrice)),
+    createdAt: format(item.createdAt, "MMMM do, yyyy"),
+    orderID: item.orderID,
+    payerID: item.payerID,
+    paymentID: item.paymentID ?? "",
+    billingToken: item.billingToken ?? "",
+    facilitatorAccessToken: item.facilitatorAccessToken ?? "",
+    paymentSource: item.paymentSource ?? "",
+  }));
+};
 
 const OrdersPage = async ({
   params
@@ -37,25 +57,13 @@ const OrdersPage = async ({
     createdAt: format(item.createdAt, "MMMM do, yyyy")
   }));
 
-  const formattedPayPalOrders: PayOrderColumn[] = orders.map((item) => ({
-    id: item.id,
-    phone: item.phone,
-    address: item.address,
-    products: item.orderItems.map((orderItem) => orderItem.product.name).join(', '),
-    totalPrice: formatter.format(item.orderItems.reduce((total, item) => {
-      return total + Number(item.product.price)
-    }, 0)),
-    isPaid: item.isPaid,
-    createdAt: format(item.createdAt, "MMMM do, yyyy"),
-    // Add the additional fields from PayPalPayment model here if available.
-    // For example:
-    orderID: "", // replace with actual data from PayPalPayment model.
-    payerID: "",
-    paymentID: "",
-    billingToken: "",
-    facilitatorAccessToken: "",
-    paymentSource: "",
-  }));
+  const paypalPayments: PayPalPayment[] = await prismadb.payPalPayment.findMany({
+    where: {
+      storeId: params.storeId
+    }
+  });
+
+  const formattedPayPalOrders: PayOrderColumn[] = convertToPayOrderColumn(paypalPayments);
 
   return (
     <div className="flex-col">

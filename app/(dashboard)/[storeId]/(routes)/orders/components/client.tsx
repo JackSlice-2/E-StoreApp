@@ -1,28 +1,34 @@
-"use client"
-import { Heading } from "@/components/ui/heading"
-import { Separator } from "@/components/ui/separator"
-import { OrderColumn, PayOrderColumn, columns, paycolumns } from "./columns"
-import { DataTable } from "@/components/ui/data-table"
+import { Heading } from "@/components/ui/heading";
+import { Separator } from "@/components/ui/separator";
+import { OrderColumn, PayOrderColumn, columns, paycolumns } from "./columns";
+import { DataTable } from "@/components/ui/data-table";
+
+type OrderOrPayOrderColumn = OrderColumn | PayOrderColumn;
 
 interface OrderClientProps {
-    stripeData: OrderColumn[]
-    paypalData: PayOrderColumn[]
+  stripeData: OrderColumn[];
+  paypalData: PayOrderColumn[];
 }
 
 export const OrderClient: React.FC<OrderClientProps> = ({
-    stripeData,
-    paypalData
+  stripeData,
+  paypalData,
 }) => {
-
-    return (
-        <>
-            <Heading
-            title={`Orders (${stripeData.length})`}
-            description="Manage orders for your store"
-            />
-        <Separator />
-        <DataTable searchKey="products" columns={columns} data={stripeData}/>
-        <DataTable searchKey="products" columns={paycolumns} data={paypalData}/>
-        </>
-    )
-}
+  return (
+    <>
+      <Heading
+        title={`Orders (${stripeData.length})`}
+        description="Manage orders for your store"
+      />
+      <Separator />
+      {/* Display regular orders */}
+      <DataTable searchKey="products" columns={columns} data={stripeData} />
+      {/* Display PayPalPayment data */}
+      <DataTable
+        searchKey="products"
+        columns={paycolumns}
+        data={paypalData as OrderOrPayOrderColumn[]}
+      />
+    </>
+  );
+};
