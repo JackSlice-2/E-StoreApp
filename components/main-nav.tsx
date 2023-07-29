@@ -52,6 +52,15 @@ export function MainNav({
             href: `/${params.storeId}/orders`,
             label: 'Orders',
             active: pathname === `/${params.storeId}/orders`
+        },{
+            href: `/${params.storeId}/paypalorders`,
+            label: 'Paypal Orders',
+            active: pathname === `/${params.storeId}/paypalorders`
+        },
+        {
+            href: `/${params.storeId}/stripeorders`,
+            label: 'Stripe Orders',
+            active: pathname === `/${params.storeId}/stripeorders`
         },
         {
             href: `/${params.storeId}/settings`,
