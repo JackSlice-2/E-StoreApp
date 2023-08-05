@@ -1,32 +1,23 @@
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
-import { OrderColumn, PayOrderColumn, columns, paycolumns } from "./columns";
+import { OrderColumn, columns } from "./columns";
 import { DataTable } from "@/components/ui/data-table";
-
-type OrderOrPayOrderColumn = OrderColumn | PayOrderColumn;
 
 interface OrderClientProps {
   stripeData: OrderColumn[];
-  paypalData: PayOrderColumn[];
 }
 
 export const OrderClient: React.FC<OrderClientProps> = ({
   stripeData,
-  paypalData,
 }) => {
   return (
     <>
       <Heading
-        title={`Orders (${stripeData.length})`}
-        description="Manage orders for your store"
+        title={`Stripe Orders (${stripeData.length})`}
+        description="Manage Stripe orders for your store"
       />
       <Separator />
       <DataTable searchKey="products" columns={columns} data={stripeData} />
-      <DataTable
-        searchKey="products"
-        columns={paycolumns}
-        data={paypalData as OrderOrPayOrderColumn[]}
-      />
     </>
   );
 };

@@ -33,14 +33,6 @@ export const columns: ColumnDef<OrderColumn>[] = [
     header: "Products",
   },
   {
-    accessorKey: "phone",
-    header: "Phone",
-  },
-  {
-    accessorKey: "address",
-    header: "Address",
-  },
-  {
     accessorKey: "totalPrice",
     header: "Total Price",
   },
@@ -48,14 +40,7 @@ export const columns: ColumnDef<OrderColumn>[] = [
     accessorKey: "isPaid",
     header: "Paid",
   },
-  {
-    id: "actions",
-    cell: ({ row }) => <CellAction data={row.original} />
-  },
-]
-
-export const paycolumns: ColumnDef<OrderColumn>[] = [
-  {
+ {
     accessorKey: "products",
     header: "Products",
   },
@@ -70,10 +55,6 @@ export const paycolumns: ColumnDef<OrderColumn>[] = [
   {
     accessorKey: "totalPrice",
     header: "Total Price",
-  },
-  {
-    accessorKey: "isPaid",
-    header: "Paid",
   },
   {
     accessorKey: "orderID",

@@ -14,10 +14,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { AlertModal } from "@/components/modals/alert-modal";
 
-import { OrderColumn } from "./columns";
+import { PayOrderColumn } from "./columns";
 
 interface CellActionProps {
-  data: OrderColumn;
+  data: PayOrderColumn;
 }
 
 export const CellAction: React.FC<CellActionProps> = ({

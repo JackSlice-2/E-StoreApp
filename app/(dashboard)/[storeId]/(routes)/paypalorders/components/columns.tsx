@@ -3,19 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { CellAction } from "./cell-action";
 
-export type CommonOrderColumn = {
-  id: string;
-  phone: string;
-  address: string;
-  isPaid: boolean;
-  totalPrice: string;
-  products: string;
-  createdAt: string;
-}
-
-export type OrderColumn = CommonOrderColumn;
-
-export type PayOrderColumn = CommonOrderColumn & {
+export type PayOrderColumn =  {
   id: string;
   totalPrice: string;
   createdAt: string;
@@ -25,36 +13,10 @@ export type PayOrderColumn = CommonOrderColumn & {
   billingToken: string;
   facilitatorAccessToken: string;
   paymentSource: string;
+  isPaid: boolean;
 }
 
-export const columns: ColumnDef<OrderColumn>[] = [
-  {
-    accessorKey: "products",
-    header: "Products",
-  },
-  {
-    accessorKey: "phone",
-    header: "Phone",
-  },
-  {
-    accessorKey: "address",
-    header: "Address",
-  },
-  {
-    accessorKey: "totalPrice",
-    header: "Total Price",
-  },
-  {
-    accessorKey: "isPaid",
-    header: "Paid",
-  },
-  {
-    id: "actions",
-    cell: ({ row }) => <CellAction data={row.original} />
-  },
-]
-
-export const paycolumns: ColumnDef<OrderColumn>[] = [
+export const paycolumns: ColumnDef<PayOrderColumn>[] = [
   {
     accessorKey: "products",
     header: "Products",

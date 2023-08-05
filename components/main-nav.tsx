@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import React from "react";
+import { ComboboxDemo } from "./ui/combobox"
 
 export function MainNav({
     className,
@@ -49,20 +50,6 @@ export function MainNav({
             active: pathname === `/${params.storeId}/products`
         },
         {
-            href: `/${params.storeId}/orders`,
-            label: 'Orders',
-            active: pathname === `/${params.storeId}/orders`
-        },{
-            href: `/${params.storeId}/paypalorders`,
-            label: 'Paypal Orders',
-            active: pathname === `/${params.storeId}/paypalorders`
-        },
-        {
-            href: `/${params.storeId}/stripeorders`,
-            label: 'Stripe Orders',
-            active: pathname === `/${params.storeId}/stripeorders`
-        },
-        {
             href: `/${params.storeId}/settings`,
             label: 'Settings',
             active: pathname === `/${params.storeId}/settings`,
@@ -70,9 +57,10 @@ export function MainNav({
     ];
 
     return (
-       <nav
-        className={cn("flex items-center space-x-4 lg:space-x-6", className)}
-        >
+    <>
+        <nav
+            className={cn("flex items-center space-x-4 lg:space-x-6 pr-20", className)}
+            >
         {routes.map((route) => (
             <Link
             key={route.href}
@@ -85,6 +73,10 @@ export function MainNav({
             {route.label}
             </Link>
         ))}
-       </nav>
+        </nav>
+        <div className="pr-5">
+        <ComboboxDemo storeId={params.storeId}/>
+        </div>
+    </>
     )
 };

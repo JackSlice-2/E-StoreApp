@@ -1,6 +1,6 @@
 import prismadb from "@/lib/prismadb";
 import { OrderClient } from "./components/client";
-import { OrderColumn, PayOrderColumn } from "./components/columns";
+import { PayOrderColumn } from "./components/columns";
 import { format } from "date-fns";
 import { formatter } from "@/lib/utils";
 import { PayPalPayment } from "@prisma/client";
@@ -44,18 +44,6 @@ const OrdersPage = async ({
     }
   });
 
-  const formattedOrders: OrderColumn[] = orders.map((item) => ({
-    id: item.id,
-    phone: item.phone,
-    address: item.address,
-    products: item.orderItems.map((orderItem) => orderItem.product.name).join(', '),
-    totalPrice: formatter.format(item.orderItems.reduce((total, item) => {
-      return total + Number(item.product.price)
-    }, 0)),
-    isPaid: item.isPaid,
-    createdAt: format(item.createdAt, "MMMM do, yyyy")
-  }));
-
   const paypalPayments: PayPalPayment[] = await prismadb.payPalPayment.findMany({
     where: {
       storeId: params.storeId
@@ -67,7 +55,7 @@ const OrdersPage = async ({
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
-        <OrderClient stripeData={formattedOrders} paypalData={formattedPayPalOrders} />
+        <OrderClient paypalData={formattedPayPalOrders} />
       </div>
     </div>
   );
