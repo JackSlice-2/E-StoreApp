@@ -31,16 +31,16 @@ export const CellAction: React.FC<CellActionProps> = ({
 
   const onConfirm = async () => {
     if (data.isPaid) {
-      toast.error('Cannot delete a paid order.');
+      toast.error('Cannot delete a paid paypalpayment.');
       return;
     }
     try {
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/orders/${data.id}`);
+      await axios.delete(`/api/${params.storeId}/paypal/${data.id}`);
       toast.success('Order deleted.');
       router.refresh();
     } catch (error) {
-      toast.error('Failed to delete order.');
+      toast.error('Failed to delete paypalpayment.');
     } finally {
       setOpen(false);
       setLoading(false);
@@ -75,7 +75,7 @@ export const CellAction: React.FC<CellActionProps> = ({
             <Copy className="mr-2 h-4 w-4" /> Copy Id
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => router.push(`/${params.storeId}/orders/${data.id}`)}
+            onClick={() => router.push(`/${params.storeId}/paypal/${data.id}`)}
           >
             <Edit className="mr-2 h-4 w-4" /> Update
           </DropdownMenuItem>

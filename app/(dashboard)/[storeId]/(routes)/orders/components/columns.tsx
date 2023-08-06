@@ -1,7 +1,7 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { CellAction } from "./cell-action";
+// import { CellAction } from "./cell-action";
 
 export type CommonOrderColumn = {
   id: string;
@@ -78,9 +78,12 @@ export const columns: ColumnDef<OrderColumn>[] = [
     accessorKey: "facilitatorAccessToken",
     header: "Paypal facilitatorAccessToken",
   },
-  {
-    id: "actions",
-    cell: ({ row }) => <CellAction data={row.original} />
-  },
+  // {
+  //   id: "actions",
+  //   cell: ({ row }) => <CellAction data={row.original} />
+  // },
 ]
 
+// PROBLEM
+
+// CELL ACTION MUST KNOW WHEN IT IS SGTRIPE OR PAYPAL {PAYMENT< 3rd DATABASE NEEDED} PAYPALORDERS, STRIPEORDERS, ALLORDERS
