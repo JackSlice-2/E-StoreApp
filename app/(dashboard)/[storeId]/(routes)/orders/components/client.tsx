@@ -8,7 +8,7 @@ type OrderOrPayOrderColumn = OrderColumn | PayOrderColumn;
 
 interface OrderClientProps {
   stripeData: OrderColumn[];
-  paypalData: PayOrderColumn[];
+  paypalData: PayOrderColumn[]
 }
 
 export const OrderClient: React.FC<OrderClientProps> = ({

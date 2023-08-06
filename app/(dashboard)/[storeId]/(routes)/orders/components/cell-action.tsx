@@ -1,4 +1,3 @@
-// File: cell-action.tsx
 
 import axios from "axios";
 import { useState } from "react";
